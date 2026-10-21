@@ -30,7 +30,7 @@ export function MobileNav() {
 
         {/* Main bar */}
         <nav
-          className="flex items-center justify-between px-5 py-3 rounded-2xl border border-white/[0.08]"
+          className="flex items-center justify-between px-5 py-3 rounded-[12px] border border-white/[0.08]"
           style={NAV_STYLE}
         >
           <Link href="/" aria-label="Veritas home" className="opacity-95 hover:opacity-100 transition-opacity">
@@ -87,7 +87,7 @@ export function MobileNav() {
           style={{ maxHeight: open ? "400px" : "0px", opacity: open ? 1 : 0 }}
         >
           <div
-            className="rounded-2xl border border-white/[0.08] px-2 py-2 flex flex-col"
+            className="rounded-[12px] border border-white/[0.08] px-2 py-2 flex flex-col"
             style={NAV_STYLE}
           >
             {NAV_LINKS.map(l => (

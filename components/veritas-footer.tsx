@@ -31,6 +31,7 @@ const FOOTER_COLS = [
     heading: "Legal",
     links: [
       { label: "Privacy",       href: "/privacy" },
+      { label: "Terms",         href: "/privacy#terms" },
       { label: "License",       href: "/license" },
       { label: "Security",      href: "/security" },
     ],
@@ -48,13 +49,13 @@ export function VeritasFooter() {
             <Link href="/" aria-label="Veritas home" className="inline-block">
               <img src="/veritas-wordmark.png" alt="Veritas" width={1726} height={375} className="block h-6 w-auto" />
             </Link>
-            <p className="mt-4 text-xs text-white/50 leading-relaxed max-w-[180px]">
-              Trustworthy AI agent orchestration. Open source.
+            <p className="mt-4 text-xs text-white/50 leading-relaxed max-w-[200px]">
+              On-premise DPDPA log compliance for Indian engineering and compliance teams.
             </p>
             {/* Status badge */}
             <div className="mt-5 inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/[0.1] bg-white/[0.04]">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#eef35f]" />
-              <span className="text-[10px] text-white/50 tracking-widest">BETA</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-[#00cbaa]" />
+              <span className="text-[10px] text-white/50 tracking-widest">v1.0.16 · GA</span>
             </div>
           </div>
 
@@ -96,7 +97,7 @@ export function VeritasFooter() {
         {/* Bottom row: copyright */}
         <div className="mt-12 pt-6 border-t border-white/[0.06] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
           <span className="text-xs text-white/35">
-            © 2024 Veritas. Open-source project.
+            © 2026 Veritas. Commercial software. <a href="mailto:hello@agentveritas.in" className="hover:text-white/65 transition-colors">hello@agentveritas.in</a>
           </span>
           <div className="flex items-center gap-6">
             <Link href="/privacy" className="text-xs text-white/35 hover:text-white/65 transition-colors tracking-widest">

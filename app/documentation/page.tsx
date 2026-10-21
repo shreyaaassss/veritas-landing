@@ -1,8 +1,7 @@
 "use client"
 
 import React, { useRef, useEffect, useState } from "react"
-import { MobileNav } from "@/components/mobile-nav"
-import { VeritasFooter } from "@/components/veritas-footer"
+import { SiteShell } from "@/components/site-shell"
 import { RevealText } from "@/components/reveal-text"
 import Link from "next/link"
 
@@ -53,8 +52,8 @@ function CodeBlock({ children, filename }: { children: string; filename?: string
 
 export default function DocumentationPage() {
   return (
-    <div className="bg-black text-white min-h-screen font-sans antialiased">
-      <MobileNav />
+    <SiteShell>
+      
 
       {/* Hero */}
       <section className="pt-40 pb-20 px-6 md:px-12 lg:px-20">
@@ -394,8 +393,6 @@ linkage_rules:
           </div>
         </div>
       </section>
-
-      <VeritasFooter />
-    </div>
+    </SiteShell>
   )
 }

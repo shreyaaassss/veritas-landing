@@ -1,8 +1,7 @@
 "use client"
 
 import React, { useRef, useEffect, useState } from "react"
-import { MobileNav } from "@/components/mobile-nav"
-import { VeritasFooter } from "@/components/veritas-footer"
+import { SiteShell } from "@/components/site-shell"
 import { RevealText } from "@/components/reveal-text"
 import Link from "next/link"
 
@@ -35,8 +34,8 @@ function Tag({ children }: { children: React.ReactNode }) {
 
 export default function SecurityPage() {
   return (
-    <div className="bg-black text-white min-h-screen font-sans antialiased">
-      <MobileNav />
+    <SiteShell>
+      
 
       {/* Hero */}
       <section className="pt-40 pb-24 px-6 md:px-12 lg:px-20">
@@ -46,11 +45,11 @@ export default function SecurityPage() {
             {"Security posture."}
           </RevealText>
           <p className="mt-8 text-base text-white/60 leading-relaxed max-w-xl">
-            Veritas is a self-hosted, open-source tool. Security is a core design principle. Here is an honest account of where we are today.
+            Veritas is a self-hosted tool. Security is a core design principle. Here is an honest account of where we are today.
           </p>
-          <div className="mt-6 p-5 rounded-2xl border border-amber-400/20 bg-amber-400/10">
-            <p className="text-sm text-amber-300 leading-relaxed">
-              <span className="font-medium">Beta notice:</span> Veritas is currently in beta. Our security posture is improving rapidly. Some hardening is still in progress. We are transparent about this below.
+          <div className="mt-6 p-5 rounded-2xl border border-[#00cbaa]/20 bg-[#00cbaa]/5">
+            <p className="text-sm text-[#00cbaa] leading-relaxed">
+              <span className="font-medium">v1.0.16 · Production-ready:</span> The core detection engine, hash chain, RBAC and licensing have all passed 412 automated tests across Ubuntu, macOS and Windows CI. Active hardening is in progress on the items listed below.
             </p>
           </div>
         </div>
@@ -204,7 +203,38 @@ export default function SecurityPage() {
         </div>
       </section>
 
-      <VeritasFooter />
-    </div>
+      {/* Evidence integrity */}
+      <section className="py-24 px-6 md:px-12 lg:px-20 border-t border-white/[0.08]">
+        <div className="max-w-6xl mx-auto">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] tracking-widest text-white/55 bg-white/[0.06] mb-5">EVIDENCE INTEGRITY</span>
+          <h2 className="mt-5 text-4xl md:text-5xl font-light tracking-tight leading-[1.05] mb-10">What tamper-evident means — and what it does not.</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <BentoCard className="p-8" delay={0}>
+              <div className="font-pixel text-[10px] text-[#00cbaa] tracking-widest mb-4">WHAT THE HASH CHAIN PROVES</div>
+              <p className="text-sm text-white/65 leading-relaxed mb-4">
+                Every verdict in Veritas is linked to the previous one by a SHA-256 hash. This creates a chain: if any record in the middle is altered, the chain breaks and verification fails. Auditors can verify the chain themselves at any time from the dashboard.
+              </p>
+              <p className="text-sm text-white/65 leading-relaxed">
+                It proves <strong className="text-white/80">internal consistency</strong> — that no record was silently edited after the fact.
+              </p>
+            </BentoCard>
+            <BentoCard className="p-8" delay={80}>
+              <div className="font-pixel text-[10px] text-amber-300 tracking-widest mb-4">CURRENT LIMITATION</div>
+              <p className="text-sm text-white/65 leading-relaxed mb-4">
+                The hash chain is stored on the same server it monitors. A user with direct database access could in principle rebuild the entire chain. This is a known limitation we document honestly.
+              </p>
+              <p className="text-sm text-white/65 leading-relaxed">
+                Mitigations: strict RBAC (database access is not part of any dashboard role), audit-log exports to an external system, and external timestamp anchoring is on the roadmap.
+              </p>
+            </BentoCard>
+          </div>
+          <div className="mt-4 p-5 rounded-2xl border border-white/[0.08] bg-white/[0.03]">
+            <p className="text-xs text-white/50 leading-relaxed">
+              <strong className="text-white/70">Responsible disclosure:</strong> Found a security issue? Email <a href="mailto:security@agentveritas.in" className="underline underline-offset-2 hover:text-white transition-colors">security@agentveritas.in</a>. We aim to acknowledge within 48 hours and resolve critical issues within 7 days. A machine-readable <a href="/.well-known/security.txt" className="underline underline-offset-2 hover:text-white transition-colors">security.txt</a> is available.
+            </p>
+          </div>
+        </div>
+      </section>
+    </SiteShell>
   )
 }

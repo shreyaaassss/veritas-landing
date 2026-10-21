@@ -1,11 +1,204 @@
 "use client"
 
+import { useState } from "react"
 import Link from "next/link"
 import {
-  ArrowRight, BarChart3, Blocks, Check, ChevronDown, FileText, GraduationCap, Handshake, LifeBuoy, Minus,
-  Server, ShieldCheck, Workflow,
+  ArrowRight, BarChart3, Blocks, Check, ChevronDown, FileText, GraduationCap, Handshake, Key, LifeBuoy, Loader2, Minus,
+  Server, ShieldCheck, Workflow, X,
 } from "lucide-react"
 import { Reveal, SiteShell } from "@/components/site-shell"
+import { supabase } from "@/lib/supabase"
+
+// ─── Claim your licence modal ─────────────────────────────────────────────────
+function ClaimLicenceModal({ onClose }: { onClose: () => void }) {
+  const [tab, setTab] = useState<"signin" | "details">("signin")
+  const [signingIn, setSigningIn] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
+  const [form, setForm] = useState({ org: "", role: "", servers: "", usecase: "" })
+  const [error, setError] = useState("")
+
+  const handleGoogle = async () => {
+    setSigningIn(true)
+    setError("")
+    const { error: err } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: { redirectTo: `${window.location.origin}/pricing` },
+    })
+    if (err) { setError("Couldn't start Google sign-in. Please try again."); setSigningIn(false) }
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!form.org.trim() || !form.role.trim()) { setError("Organisation name and your role are required."); return }
+    setSubmitting(true)
+    setError("")
+    try {
+      const { data: { session } } = await supabase.auth.getSession()
+      await fetch("/api/claim-licence", {
+        method: "POST",
+        headers: { "content-type": "application/json", ...(session ? { authorization: `Bearer ${session.access_token}` } : {}) },
+        body: JSON.stringify(form),
+      })
+      setSubmitted(true)
+    } catch {
+      setError("Something went wrong. Please email hello@agentveritas.in directly.")
+    } finally {
+      setSubmitting(false)
+    }
+  }
+
+  const field = (label: string, key: keyof typeof form, placeholder: string, required = false, type = "text") => (
+    <div style={{ display: "grid", gap: 6 }}>
+      <label style={{ fontSize: 12, fontWeight: 500, color: "var(--color-cloud)", letterSpacing: "0.04em" }}>
+        {label}{required && <span style={{ color: "var(--color-live-wire)", marginLeft: 3 }}>*</span>}
+      </label>
+      <input
+        type={type}
+        value={form[key]}
+        onChange={e => setForm(f => ({ ...f, [key]: e.target.value }))}
+        placeholder={placeholder}
+        required={required}
+        style={{
+          background: "var(--color-graphite)", border: "1px solid var(--color-ash)", borderRadius: 8,
+          padding: "10px 14px", fontSize: 14, color: "#fff", outline: "none", width: "100%", boxSizing: "border-box" as const,
+        }}
+        onFocus={e => (e.target.style.borderColor = "var(--color-live-wire)")}
+        onBlur={e => (e.target.style.borderColor = "var(--color-ash)")}
+      />
+    </div>
+  )
+
+  return (
+    <div className="tg-modal-backdrop" onClick={e => { if (e.target === e.currentTarget) onClose() }} role="dialog" aria-modal="true" aria-label="Claim your licence">
+      <div className="tg-modal" style={{ width: "min(520px, 100%)" }}>
+
+        {/* Header */}
+        <div className="tg-modal-head">
+          <span className="tg-modal-icon"><Key /></span>
+          <div style={{ flex: 1 }}>
+            <p className="tg-modal-title">Claim your licence</p>
+            <p className="tg-modal-sub">{tab === "signin" ? "Sign in to continue" : "Tell us about your organisation"}</p>
+          </div>
+          <button className="tg-modal-x" onClick={onClose} aria-label="Close"><X size={16} /></button>
+        </div>
+
+        {/* Tab pills */}
+        {!submitted && (
+          <div style={{ display: "flex", gap: 4, padding: "0 24px 16px", borderBottom: "1px solid var(--color-graphite)" }}>
+            {(["signin", "details"] as const).map((t, i) => (
+              <button
+                key={t}
+                onClick={() => tab === "details" && setTab(t)}
+                style={{
+                  display: "flex", alignItems: "center", gap: 8, padding: "6px 14px",
+                  borderRadius: 50, border: "none", cursor: tab === "details" ? "pointer" : "default",
+                  background: tab === t ? "var(--color-live-wire)" : "var(--color-graphite)",
+                  color: tab === t ? "#000" : "var(--color-cloud)",
+                  fontSize: 12, fontWeight: 600, letterSpacing: "0.04em", transition: "all 0.2s",
+                }}
+              >
+                <span style={{
+                  width: 18, height: 18, borderRadius: "50%",
+                  background: tab === t ? "rgba(0,0,0,0.2)" : "var(--color-ash)",
+                  display: "grid", placeItems: "center", fontSize: 10, fontWeight: 700, flexShrink: 0,
+                }}>{i + 1}</span>
+                {t === "signin" ? "Sign in" : "Your details"}
+              </button>
+            ))}
+          </div>
+        )}
+
+        {/* Body */}
+        <div className="tg-modal-body" style={{ padding: "20px 24px" }}>
+
+          {/* ─ Tab 1: Sign in ─ */}
+          {tab === "signin" && !submitted && (
+            <div style={{ display: "grid", gap: 20 }}>
+              <p style={{ margin: 0, fontSize: 14, color: "var(--color-cloud)", lineHeight: 1.6 }}>
+                Sign in with Google to claim your Veritas licence. We&#39;ll collect your organisation
+                details on the next step and follow up within 1 business day.
+              </p>
+              <button
+                onClick={handleGoogle}
+                disabled={signingIn}
+                style={{
+                  display: "flex", alignItems: "center", justifyContent: "center", gap: 12,
+                  padding: "12px 20px", borderRadius: 10, border: "1px solid var(--color-ash)",
+                  background: "var(--color-graphite)", color: "#fff", fontSize: 14, fontWeight: 500,
+                  cursor: signingIn ? "not-allowed" : "pointer", opacity: signingIn ? 0.6 : 1, width: "100%",
+                }}
+              >
+                {signingIn
+                  ? <><Loader2 size={16} style={{ animation: "tg-spin 1s linear infinite" }} /> Redirecting…</>
+                  : <><svg width="18" height="18" viewBox="0 0 18 18"><path fill="#4285F4" d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 0 1-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615Z"/><path fill="#34A853" d="M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18Z"/><path fill="#FBBC05" d="M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332Z"/><path fill="#EA4335" d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 6.29C4.672 4.163 6.656 3.58 9 3.58Z"/></svg> Continue with Google</>
+                }
+              </button>
+              <p style={{ fontSize: 12, color: "var(--color-fog)", margin: 0, textAlign: "center" }}>
+                Already have a licence key?{" "}
+                <button onClick={() => setTab("details")} style={{ background: "none", border: "none", color: "var(--color-live-wire)", cursor: "pointer", fontSize: 12, padding: 0, textDecoration: "underline" }}>
+                  Skip to org details
+                </button>
+              </p>
+            </div>
+          )}
+
+          {/* ─ Tab 2: Org details ─ */}
+          {tab === "details" && !submitted && (
+            <form onSubmit={handleSubmit} style={{ display: "grid", gap: 16 }}>
+              {field("Organisation name", "org", "Acme Fintech Pvt. Ltd.", true)}
+              {field("Your role", "role", "CTO, DPO, Head of Engineering…", true)}
+              {field("Estimated server / agent count", "servers", "e.g. 5 servers")}
+              <div style={{ display: "grid", gap: 6 }}>
+                <label style={{ fontSize: 12, fontWeight: 500, color: "var(--color-cloud)", letterSpacing: "0.04em" }}>Use case</label>
+                <textarea
+                  value={form.usecase}
+                  onChange={e => setForm(f => ({ ...f, usecase: e.target.value }))}
+                  placeholder="Briefly describe what you need Veritas for…"
+                  rows={3}
+                  style={{
+                    background: "var(--color-graphite)", border: "1px solid var(--color-ash)", borderRadius: 8,
+                    padding: "10px 14px", fontSize: 14, color: "#fff", outline: "none", width: "100%",
+                    resize: "vertical", boxSizing: "border-box" as const, fontFamily: "inherit",
+                  }}
+                  onFocus={e => (e.target.style.borderColor = "var(--color-live-wire)")}
+                  onBlur={e => (e.target.style.borderColor = "var(--color-ash)")}
+                />
+              </div>
+              {error && <p style={{ margin: 0, fontSize: 13, color: "#ff8a80" }}>{error}</p>}
+              <button
+                type="submit"
+                disabled={submitting}
+                className="tg-btn tg-btn-primary"
+                style={{ justifyContent: "center", opacity: submitting ? 0.6 : 1 }}
+              >
+                {submitting ? <><Loader2 size={16} style={{ animation: "tg-spin 1s linear infinite" }} /> Sending…</> : <>Send request <ArrowRight size={16} /></>}
+              </button>
+              <p style={{ fontSize: 12, color: "var(--color-fog)", margin: 0 }}>
+                We&#39;ll follow up at your sign-in email within 1 business day.
+              </p>
+            </form>
+          )}
+
+          {/* ─ Success ─ */}
+          {submitted && (
+            <div style={{ display: "grid", gap: 16, textAlign: "center", padding: "8px 0 16px" }}>
+              <div style={{ fontSize: 40 }}>✓</div>
+              <p style={{ margin: 0, fontSize: 16, fontWeight: 500, color: "#fff" }}>Request received</p>
+              <p style={{ margin: 0, fontSize: 14, color: "var(--color-cloud)", lineHeight: 1.6 }}>
+                We&#39;ll review your details and follow up within 1 business day at the email you used to sign in.
+                In the meantime, feel free to <Link href="/book-demo" style={{ color: "var(--color-live-wire)" }}>book a demo</Link>.
+              </p>
+              <button className="tg-btn tg-btn-white" onClick={onClose} style={{ justifyContent: "center" }}>Close</button>
+            </div>
+          )}
+
+          {error && tab === "signin" && <p style={{ margin: "12px 0 0", fontSize: 13, color: "#ff8a80" }}>{error}</p>}
+        </div>
+      </div>
+    </div>
+  )
+}
 
 // Tiers, limits and prices follow "Veritas: Business and Revenue Model" (sections 7–8).
 // Agents are the only enforced limit; log volume is a fair-use guide.
@@ -129,6 +322,7 @@ const FAQ = [
 ]
 
 export default function PricingPage() {
+  const [claimOpen, setClaimOpen] = useState(false)
   return (
     <SiteShell>
       {/* ── Hero ── */}
@@ -146,6 +340,22 @@ export default function PricingPage() {
           </div>
         </div>
       </section>
+
+      {/* ── Claim your licence ── */}
+      <section style={{ padding: "40px 0 48px", display: "flex", flexDirection: "column", alignItems: "center", gap: 10 }}>
+        <p style={{ margin: 0, fontSize: 12, color: "var(--color-fog)", letterSpacing: "0.06em", textTransform: "uppercase" }}>Ready to get started?</p>
+        <button
+          id="claim-licence-btn"
+          onClick={() => setClaimOpen(true)}
+          className="tg-btn tg-btn-primary"
+          style={{ fontSize: 15, padding: "12px 28px", borderRadius: 50 }}
+        >
+          Claim your licence <ArrowRight size={16} />
+        </button>
+      </section>
+
+      {/* Modal */}
+      {claimOpen && <ClaimLicenceModal onClose={() => setClaimOpen(false)} />}
 
       {/* ── Tiers ── */}
       <section className="tg-price-tiers-wrap">

@@ -1,8 +1,7 @@
 "use client"
 
 import React, { useRef, useEffect, useState } from "react"
-import { MobileNav } from "@/components/mobile-nav"
-import { VeritasFooter } from "@/components/veritas-footer"
+import { SiteShell } from "@/components/site-shell"
 import { RevealText } from "@/components/reveal-text"
 import Link from "next/link"
 
@@ -59,8 +58,8 @@ export default function BookDemoPage() {
     `w-full px-4 py-3 text-sm rounded-xl border ${errors[field] ? "border-red-400/50 bg-red-500/10" : "border-white/[0.14] bg-[#0e0f11]"} focus:outline-none focus:border-white/35 transition-colors placeholder:text-white/40`
 
   return (
-    <div className="bg-black text-white min-h-screen font-sans antialiased">
-      <MobileNav />
+    <SiteShell>
+      
 
       <section className="pt-40 pb-24 px-6 md:px-12 lg:px-20">
         <div className="max-w-6xl mx-auto">
@@ -183,8 +182,6 @@ export default function BookDemoPage() {
           </div>
         </div>
       </section>
-
-      <VeritasFooter />
-    </div>
+    </SiteShell>
   )
 }

@@ -1,8 +1,7 @@
 "use client"
 
 import React, { useRef, useEffect, useState } from "react"
-import { MobileNav } from "@/components/mobile-nav"
-import { VeritasFooter } from "@/components/veritas-footer"
+import { SiteShell } from "@/components/site-shell"
 import { RevealText } from "@/components/reveal-text"
 import { PixelIcon } from "@/components/pixel-icon"
 import Link from "next/link"
@@ -34,8 +33,8 @@ function Tag({ children }: { children: React.ReactNode }) {
 
 export default function AboutPage() {
   return (
-    <div className="bg-black text-white min-h-screen font-sans antialiased">
-      <MobileNav />
+    <SiteShell>
+      
 
       {/* Hero */}
       <section className="pt-40 pb-24 px-6 md:px-12 lg:px-20">
@@ -45,7 +44,7 @@ export default function AboutPage() {
             {"Compliance,\nwithout compromise."}
           </RevealText>
           <p className="mt-8 text-base text-white/60 leading-relaxed max-w-xl">
-            Veritas began with India&apos;s Digital Personal Data Protection Act 2023 - a real, urgent compliance challenge with no good on-premise tooling to solve it. The platform is built to be equally relevant for any organisation subject to modern personal data protection law.
+            Veritas began with India&apos;s Digital Personal Data Protection Act 2023 — a real, urgent compliance challenge with no good on-premise tooling to solve it. Veritas is commercial software built for engineering and compliance teams at Indian companies that process personal data.
           </p>
         </div>
       </section>
@@ -53,18 +52,9 @@ export default function AboutPage() {
       {/* Mission */}
       <section className="py-8 pb-24 px-6 md:px-12 lg:px-20 border-t border-white/[0.08]">
         <div className="max-w-6xl mx-auto">
-          <BentoCard className="p-10 md:p-14 overflow-hidden relative" delay={0}>
-            {/* Iridescent image accent */}
-            <div className="hidden md:block absolute inset-y-0 right-0 w-2/5 pointer-events-none opacity-60">
-              <img
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/analyst-Ysxnqg7Fpy2cfA56PiIttv1KximMhT.png"
-                alt=""
-                className="w-full h-full object-cover object-center"
-              />
-              <div className="absolute inset-0" style={{ background: "linear-gradient(to right, #0e0f11 0%, transparent 60%)" }} />
-            </div>
-            <p className="relative z-10 text-2xl md:text-3xl font-light leading-relaxed text-white/80 max-w-2xl">
-              &ldquo;Every organisation processing personal data is now legally required to detect violations, maintain auditable records, and prove compliance. Doing this manually across hundreds of microservices is impossible. Veritas automates it - on your own infrastructure, with your data never leaving your network.&rdquo;
+          <BentoCard className="p-10 md:p-14" delay={0}>
+            <p className="text-2xl md:text-3xl font-light leading-relaxed text-white/80 max-w-2xl">
+              &ldquo;Every organisation processing personal data is now legally required to detect violations, maintain auditable records, and prove compliance. Doing this manually across hundreds of microservices is impossible. Veritas automates it &mdash; on your own infrastructure, with no raw personal data leaving your network. It is commercial software, not open source.&rdquo;
             </p>
           </BentoCard>
         </div>
@@ -180,7 +170,7 @@ export default function AboutPage() {
       {/* Technical status */}
       <section className="py-24 px-6 md:px-12 lg:px-20 border-t border-white/[0.08]">
         <div className="max-w-6xl mx-auto">
-          <Tag>PROJECT STATUS</Tag>
+          <Tag>PRODUCT STATUS</Tag>
           <RevealText className="mt-5 text-4xl md:text-5xl font-light tracking-tight leading-[1.05] mb-10">{"v1.0.16. Production-quality.\nHonest about what&apos;s next."}</RevealText>
 
           <BentoCard className="p-8 md:p-10" delay={0}>
@@ -233,6 +223,46 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Team */}
+      <section className="py-24 px-6 md:px-12 lg:px-20 border-t border-white/[0.08]">
+        <div className="max-w-6xl mx-auto">
+          <Tag>THE TEAM</Tag>
+          <RevealText className="mt-5 text-4xl md:text-5xl font-light tracking-tight leading-[1.05] mb-12">
+            {"Demo Gods"}
+          </RevealText>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <BentoCard className="p-8" delay={0}>
+              <div className="flex items-start gap-5">
+                <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center text-lg font-light shrink-0">✦</div>
+                <div>
+                  <p className="font-medium text-white/90 mb-1">[Founder name — update in about/page.tsx]</p>
+                  <p className="text-sm text-white/50 mb-3">[Role] · <a href="#" className="underline underline-offset-2 hover:text-white/80 transition-colors">[LinkedIn]</a></p>
+                  <p className="text-sm text-white/60 leading-relaxed">[Bio — update in about/page.tsx]</p>
+                </div>
+              </div>
+            </BentoCard>
+          </div>
+          {/* Company details */}
+          <BentoCard className="mt-6 p-8" delay={80}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div>
+                <div className="text-[10px] text-white/40 tracking-widest uppercase mb-2">Legal entity</div>
+                <p className="text-sm text-white/70">[Company legal name — update here]</p>
+              </div>
+              <div>
+                <div className="text-[10px] text-white/40 tracking-widest uppercase mb-2">Registered address</div>
+                <p className="text-sm text-white/70">[Address — update here]</p>
+              </div>
+              <div>
+                <div className="text-[10px] text-white/40 tracking-widest uppercase mb-2">Contact &amp; support</div>
+                <p className="text-sm text-white/70"><a href="mailto:hello@agentveritas.in" className="underline underline-offset-2 hover:text-white transition-colors">hello@agentveritas.in</a></p>
+                <p className="text-xs text-white/45 mt-1">We aim to respond within 1 business day.</p>
+              </div>
+            </div>
+          </BentoCard>
+        </div>
+      </section>
+
       {/* CTAs */}
       <section className="py-20 px-6 md:px-12 lg:px-20 border-t border-white/[0.08]">
         <div className="max-w-6xl mx-auto flex flex-col sm:flex-row gap-3">
@@ -240,8 +270,6 @@ export default function AboutPage() {
           <Link href="/contact" className="flex-1 px-8 py-4 border border-white/15 text-white/72 text-sm rounded-full font-medium hover:border-white/30 hover:text-white transition-all tracking-[0.012em] text-center">Contact Us</Link>
         </div>
       </section>
-
-      <VeritasFooter />
-    </div>
+    </SiteShell>
   )
 }

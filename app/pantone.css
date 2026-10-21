@@ -1,0 +1,234 @@
+/*
+ * pantone.css — Veritas global Pantone accent layer (v2)
+ * Colors applied to: terminal text, code syntax, badges, interactive states.
+ * NO transparent section gradients or card overlay tints.
+ *
+ * Pantone palette:
+ *   --pt-lime:   #DCFF00  Sun Glare
+ *   --pt-orange: #FF5722  Exuberant Orange
+ *   --pt-violet: #7B6CE0  Blue Violet
+ *   --pt-cloud:  #F3F1ED  Cloud Dancer
+ *   --pt-ink:    #1A1A1A  Darkest Hour
+ */
+
+:root {
+  --pt-lime:   #DCFF00;
+  --pt-orange: #FF5722;
+  --pt-violet: #7B6CE0;
+  --pt-cloud:  #F3F1ED;
+  --pt-ink:    #1A1A1A;
+}
+
+/* ── Scrollbar ── */
+* { scrollbar-width: thin; scrollbar-color: var(--pt-violet) #111; }
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #111; }
+::-webkit-scrollbar-thumb { background: var(--pt-violet); border-radius: 99px; }
+
+/* ── Text selection ── */
+::selection { background: var(--pt-violet); color: #fff; }
+
+/* ── Focus rings ── */
+:focus-visible { outline: 2px solid var(--pt-violet); outline-offset: 3px; border-radius: 6px; }
+
+/* ════════════════════════════════════════════════════════
+   TERMINAL / CODE BLOCK SYNTAX COLORS
+   Applied to pre and code elements across all pages
+   ════════════════════════════════════════════════════════ */
+
+/* Base code text — warm off-white (Cloud Dancer) */
+pre, code {
+  color: var(--pt-cloud) !important;
+}
+
+/* YAML / config keys — violet */
+pre .yaml-key,
+pre .key,
+pre [data-key] {
+  color: var(--pt-violet);
+}
+
+/* String values — orange */
+pre .yaml-val,
+pre .val,
+pre .string {
+  color: var(--pt-orange);
+}
+
+/* Numbers / booleans — neon yellow */
+pre .num, pre .number, pre .bool {
+  color: var(--pt-lime);
+}
+
+/* Comments — muted with slight violet tint */
+pre .comment, pre .cm {
+  color: rgba(123, 108, 224, 0.55);
+  font-style: italic;
+}
+
+/* Shell prompt $ sign */
+pre .prompt, pre .cmd::before {
+  color: var(--pt-orange) !important;
+}
+
+/* Command names after prompt */
+pre .cmd {
+  color: var(--pt-cloud) !important;
+}
+
+/* Success / OK output */
+pre .ok, pre .success {
+  color: var(--pt-lime) !important;
+}
+
+/* Error / fail output */
+pre .err, pre .error {
+  color: var(--pt-orange) !important;
+}
+
+/* URLs / paths */
+pre .url, pre .path {
+  color: var(--pt-violet) !important;
+  text-decoration: underline;
+  text-decoration-color: rgba(123,108,224,0.35);
+}
+
+/* Hash / hex values */
+pre .hash {
+  color: rgba(220,255,0,0.75);
+  font-size: 0.92em;
+}
+
+/* Highlighted / hit tokens in log viewer */
+pre .hit, code .hit {
+  color: var(--pt-cloud) !important;
+  background: rgba(123,108,224,0.18) !important;
+  border: 1px solid rgba(123,108,224,0.3);
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+
+/* Masked / redacted tokens */
+pre .masked, code .masked {
+  color: #a1a1aa !important;
+  background: rgba(255,255,255,0.06) !important;
+}
+
+/* ════════════════════════════════════════════════════════
+   STATUS / SEVERITY BADGES in terminals
+   ════════════════════════════════════════════════════════ */
+
+/* EXPOSURE / HIGH severity */
+.badge-exposure, .badge-high, [data-severity="high"] {
+  background: rgba(255,87,34,0.12) !important;
+  color: var(--pt-orange) !important;
+  border-color: rgba(255,87,34,0.3) !important;
+}
+
+/* MEDIUM severity */
+.badge-medium, [data-severity="medium"] {
+  background: rgba(220,255,0,0.10) !important;
+  color: var(--pt-lime) !important;
+  border-color: rgba(220,255,0,0.25) !important;
+}
+
+/* LOW severity / info */
+.badge-low, [data-severity="low"] {
+  background: rgba(123,108,224,0.10) !important;
+  color: var(--pt-violet) !important;
+  border-color: rgba(123,108,224,0.25) !important;
+}
+
+/* ════════════════════════════════════════════════════════
+   PRODUCTION / STATUS BADGES
+   ════════════════════════════════════════════════════════ */
+
+/* Legacy teal status → violet */
+[class*="text-[#00cbaa]"],
+[class*="text-\\[#00cbaa\\]"] {
+  color: var(--pt-violet) !important;
+}
+[class*="bg-[#00cbaa]"],
+[class*="bg-\\[#00cbaa\\]"] {
+  background: rgba(123,108,224,0.12) !important;
+  border-color: rgba(123,108,224,0.3) !important;
+}
+
+/* Amber warnings → orange */
+[class*="text-amber"], .text-amber-300 {
+  color: var(--pt-orange) !important;
+}
+
+/* ════════════════════════════════════════════════════════
+   INTERACTIVE ELEMENT ACCENTS
+   ════════════════════════════════════════════════════════ */
+
+/* Primary yellow button — glow on hover */
+button[class*="bg-[#eef35f]"]:hover,
+a[class*="bg-[#eef35f]"]:hover {
+  box-shadow: 0 0 24px rgba(220,255,0,0.3);
+  transform: translateY(-1px);
+  transition: box-shadow 0.2s, transform 0.15s;
+}
+
+/* Input focus — violet ring */
+input:focus, textarea:focus, select:focus {
+  border-color: rgba(123,108,224,0.5) !important;
+  box-shadow: 0 0 0 3px rgba(123,108,224,0.12) !important;
+  outline: none !important;
+}
+
+/* ════════════════════════════════════════════════════════
+   TEXT VISIBILITY FIX
+   Neon yellow bg (button/card) must always have black text
+   ════════════════════════════════════════════════════════ */
+
+[style*="background: #eef35f"],
+[style*="background:#eef35f"],
+[style*="background: #DCFF00"],
+[style*="background: var(--color-live-wire)"],
+[class*="bg-[#eef35f]"],
+[class*="bg-\\[#eef35f\\]"],
+.tg-btn-primary,
+.tg-btn-white {
+  color: #000 !important;
+}
+
+/* Cloud Dancer (off-white) backgrounds — also need dark text */
+[style*="background: #F3F1ED"],
+[style*="background:#F3F1ED"],
+[style*="background: var(--pantone-cloud)"] {
+  color: #111 !important;
+}
+
+/* Sun Glare lime backgrounds — black text */
+[style*="background: #DCFF00"],
+[style*="background:#DCFF00"],
+[style*="background: var(--pt-lime)"] {
+  color: #000 !important;
+}
+
+/* ════════════════════════════════════════════════════════
+   DIVIDERS
+   ════════════════════════════════════════════════════════ */
+
+hr {
+  border-color: rgba(123,108,224,0.12) !important;
+}
+
+/* ════════════════════════════════════════════════════════
+   FOOTER
+   ════════════════════════════════════════════════════════ */
+
+footer a:hover {
+  color: var(--pt-violet) !important;
+  transition: color 0.15s;
+}
+
+/* ════════════════════════════════════════════════════════
+   TABLE
+   ════════════════════════════════════════════════════════ */
+
+table thead th {
+  border-bottom: 1px solid rgba(123,108,224,0.18);
+}

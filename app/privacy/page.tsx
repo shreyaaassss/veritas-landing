@@ -1,8 +1,7 @@
 "use client"
 
 import React, { useRef, useEffect, useState } from "react"
-import { MobileNav } from "@/components/mobile-nav"
-import { VeritasFooter } from "@/components/veritas-footer"
+import { SiteShell } from "@/components/site-shell"
 import Link from "next/link"
 
 function useInView(threshold = 0.15) {
@@ -29,8 +28,8 @@ function Section({ children, id, delay = 0 }: { children: React.ReactNode; id: s
 
 export default function PrivacyPage() {
   return (
-    <div className="bg-black text-white min-h-screen font-sans antialiased">
-      <MobileNav />
+    <SiteShell>
+      
 
       <div className="pt-40 pb-24 px-6 md:px-12 lg:px-20">
         <div className="max-w-3xl mx-auto">
@@ -44,7 +43,7 @@ export default function PrivacyPage() {
             </p>
             <div className="p-5 rounded-2xl border border-white/[0.09] bg-[#0e0f11]">
               <p className="text-sm text-white/72 leading-relaxed">
-                Veritas is an open-source, self-hosted tool. <strong className="font-medium">By default, Veritas does not collect, transmit, or store any data on external servers.</strong> All audit logs are written to your local filesystem. Nothing leaves your environment unless you configure it to.
+                Veritas is commercial, self-hosted software. <strong className="font-medium">By design, Veritas does not transmit your log data or personal data to external servers.</strong> All audit evidence is written to your own infrastructure. The only optional egress is AI-assisted investigation, which sends only field names and rule text — never raw values.
               </p>
             </div>
           </div>
@@ -154,8 +153,6 @@ export default function PrivacyPage() {
           </div>
         </div>
       </div>
-
-      <VeritasFooter />
-    </div>
+    </SiteShell>
   )
 }

@@ -1,8 +1,7 @@
 "use client"
 
 import React, { useRef, useEffect, useState } from "react"
-import { MobileNav } from "@/components/mobile-nav"
-import { VeritasFooter } from "@/components/veritas-footer"
+import { SiteShell } from "@/components/site-shell"
 import { RevealText } from "@/components/reveal-text"
 import { PixelIcon } from "@/components/pixel-icon"
 import Link from "next/link"
@@ -36,13 +35,18 @@ function Tag({ children }: { children: React.ReactNode }) {
 
 function StatusBadge({ status }: { status: "production" | "beta" | "planned" }) {
   const styles = {
-    production: "bg-[#00cbaa]/10 text-[#00cbaa] border-[#00cbaa]/25",
-    beta: "bg-amber-400/10 text-amber-300 border-amber-400/20",
-    planned: "bg-white/[0.06] text-white/55 border-white/[0.1]",
+    production: "border tracking-widest text-[10px] px-2 py-0.5 rounded-full",
+    beta:       "border tracking-widest text-[10px] px-2 py-0.5 rounded-full",
+    planned:    "border tracking-widest text-[10px] px-2 py-0.5 rounded-full",
+  }
+  const inlineStyles = {
+    production: { background: "rgba(123,108,224,0.12)", color: "#7B6CE0", borderColor: "rgba(123,108,224,0.3)" },
+    beta:       { background: "rgba(255,87,34,0.10)",   color: "#FF5722", borderColor: "rgba(255,87,34,0.3)"   },
+    planned:    { background: "rgba(255,255,255,0.05)", color: "rgba(255,255,255,0.45)", borderColor: "rgba(255,255,255,0.1)" },
   }
   const labels = { production: "Production", beta: "Beta", planned: "Planned" }
   return (
-    <span className={`text-[10px] px-2 py-0.5 rounded-full border tracking-widest ${styles[status]}`}>
+    <span className={styles[status]} style={inlineStyles[status]}>
       {labels[status]}
     </span>
   )
@@ -50,8 +54,8 @@ function StatusBadge({ status }: { status: "production" | "beta" | "planned" }) 
 
 export default function ProductPage() {
   return (
-    <div className="bg-black text-white min-h-screen font-sans antialiased">
-      <MobileNav />
+    <SiteShell>
+      
 
       {/* Hero */}
       <section className="pt-40 pb-24 px-6 md:px-12 lg:px-20">
@@ -337,8 +341,6 @@ export default function ProductPage() {
           <Link href="/documentation" className="flex-1 px-8 py-4 border border-white/15 text-white/72 text-sm rounded-full font-medium hover:border-white/30 hover:text-white transition-all tracking-[0.012em] text-center">INSTALLATION Guide</Link>
         </div>
       </section>
-
-      <VeritasFooter />
-    </div>
+    </SiteShell>
   )
 }
