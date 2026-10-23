@@ -6,7 +6,7 @@ import { useAuth, type Os } from "@/components/auth"
 
 const OPTIONS: { os: Os; icon: typeof Terminal; label: string; pkg: string }[] = [
   { os: "linux", icon: Terminal, label: "Linux", pkg: "Ubuntu 22.04+ / Debian" },
-  { os: "macos", icon: Monitor, label: "macOS", pkg: "macOS 12+ (Apple Silicon)" },
+  { os: "macos", icon: Monitor, label: "macOS", pkg: "macOS 12+ (Apple Silicon only, Intel not supported)" },
   { os: "windows", icon: LayoutDashboard, label: "Windows", pkg: "Windows 10/11, Server 2019+" },
 ]
 
@@ -28,9 +28,9 @@ export function DownloadButtons() {
                 className="tg-btn tg-btn-primary tg-btn-sm"
                 onClick={() => requestDownload(os)}
                 disabled={st.state === "sending"}
-                aria-label={`Download Veritas for ${label}`}
+                aria-label={`Request Veritas installer for ${label}`}
               >
-                {st.state === "sending" ? <><Loader2 className="tg-spin-icon" /> Sending…</> : st.state === "sent" ? <><Check /> Sent</> : <>Download now</>}
+                {st.state === "sending" ? <><Loader2 className="tg-spin-icon" /> Sending…</> : st.state === "sent" ? <><Check /> Sent</> : <>Request installer</>}
               </button>
               <span aria-live="polite">
                 {st.state === "sent" && <span className="tg-dl-note ok"><Mail size={13} /> Guide sent to {st.email}</span>}
@@ -48,8 +48,8 @@ export function DownloadButtons() {
       </div>
       <p className="tg-body-sm tg-dl-auth">
         {session
-          ? <>Signed in as {session.user.email}. The guide goes to this address.</>
-          : <>Downloads need a free account: <button type="button" onClick={register}>register with Google</button> and we&apos;ll email the installation guide for your OS to your Gmail.</>}
+          ? <>Signed in as {session.user.email}. The installer guide goes to this address.</>
+          : <>A free account is needed to receive the installer guide. Google Workspace (work email) and personal Gmail both work: <button type="button" onClick={register}>sign in with Google</button>.</>}
       </p>
     </>
   )

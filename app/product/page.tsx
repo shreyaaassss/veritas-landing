@@ -1,8 +1,7 @@
 "use client"
 
 import React, { useRef, useEffect, useState } from "react"
-import { MobileNav } from "@/components/mobile-nav"
-import { VeritasFooter } from "@/components/veritas-footer"
+import { SiteShell } from "@/components/site-shell"
 import { RevealText } from "@/components/reveal-text"
 import Link from "next/link"
 
@@ -89,8 +88,8 @@ const SEVERITY_STYLE: Record<string, string> = {
 
 export default function ProductPage() {
   return (
-    <div className="bg-black text-white min-h-screen font-sans antialiased">
-      <MobileNav />
+    <SiteShell>
+      
 
       {/* Hero */}
       <section className="pt-40 pb-24 px-6 md:px-12 lg:px-20">
@@ -350,8 +349,6 @@ export default function ProductPage() {
           <Link href="/documentation" className="flex-1 px-8 py-4 border border-white/15 text-white/72 text-sm rounded-full font-medium hover:border-white/30 hover:text-white transition-all tracking-[0.012em] text-center">INSTALLATION Guide</Link>
         </div>
       </section>
-
-      <VeritasFooter />
-    </div>
+    </SiteShell>
   )
 }

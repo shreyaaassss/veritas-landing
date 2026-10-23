@@ -43,3 +43,6 @@ next-env.d.ts
 # Cloudflare
 .wrangler/
 .dev.vars*
+
+# internal business documents
+*.pdf

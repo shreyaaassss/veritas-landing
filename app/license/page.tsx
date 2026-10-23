@@ -1,8 +1,7 @@
 "use client"
 
 import React, { useRef, useEffect, useState } from "react"
-import { MobileNav } from "@/components/mobile-nav"
-import { VeritasFooter } from "@/components/veritas-footer"
+import { SiteShell } from "@/components/site-shell"
 import Link from "next/link"
 
 function useInView(threshold = 0.15) {
@@ -38,8 +37,8 @@ const TERMS = [
 
 export default function LicensePage() {
   return (
-    <div className="bg-black text-white min-h-screen font-sans antialiased">
-      <MobileNav />
+    <SiteShell>
+      
 
       <div className="pt-40 pb-24 px-6 md:px-12 lg:px-20">
         <div className="max-w-3xl mx-auto">
@@ -52,6 +51,7 @@ export default function LicensePage() {
             </p>
           </FadeIn>
 
+          {/* What is permitted */}
           <FadeIn delay={80}>
             <div className="mb-10 p-6 rounded-2xl border border-white/[0.09] bg-[#0e0f11]">
               <h2 className="text-lg font-light mb-5">How Veritas is licensed</h2>
@@ -91,6 +91,7 @@ export default function LicensePage() {
             </div>
           </FadeIn>
 
+          {/* Continuity */}
           <FadeIn delay={200}>
             <p className="mt-8 text-xs text-white/50 leading-relaxed">
               Veritas includes third-party open-source components, which remain under their own licences. Each release publishes a software bill of materials that lists them.
@@ -106,15 +107,13 @@ export default function LicensePage() {
                 Request a Licence
               </Link>
               <Link href="/contact" className="px-6 py-3 border border-white/15 text-white/72 text-xs rounded-full font-medium hover:border-white/30 hover:text-white transition-all tracking-[0.012em] text-center">
-                QUESTIONS? Contact Us
+                Licensing questions? Contact Us
               </Link>
             </div>
           </FadeIn>
 
         </div>
       </div>
-
-      <VeritasFooter />
-    </div>
+    </SiteShell>
   )
 }

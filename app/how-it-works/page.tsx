@@ -1,8 +1,7 @@
 "use client"
 
 import React, { useRef, useEffect, useState } from "react"
-import { MobileNav } from "@/components/mobile-nav"
-import { VeritasFooter } from "@/components/veritas-footer"
+import { SiteShell } from "@/components/site-shell"
 import { RevealText } from "@/components/reveal-text"
 import { PixelIcon } from "@/components/pixel-icon"
 import Link from "next/link"
@@ -95,8 +94,8 @@ PASS  organization acme_retail: 11356 records, 5 checkpoints`,
 
 export default function HowItWorksPage() {
   return (
-    <div className="bg-black text-white min-h-screen font-sans antialiased">
-      <MobileNav />
+    <SiteShell>
+      
 
       {/* Hero */}
       <section className="pt-40 pb-24 px-6 md:px-12 lg:px-20">
@@ -330,8 +329,6 @@ notices:
           </Link>
         </div>
       </section>
-
-      <VeritasFooter />
-    </div>
+    </SiteShell>
   )
 }

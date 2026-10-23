@@ -1,0 +1,12 @@
+# Veritas Security Policy
+# https://agentveritas.in/.well-known/security.txt
+
+Contact: mailto:security@agentveritas.in
+Expires: 2027-10-21T00:00:00.000Z
+Preferred-Languages: en
+Policy: https://agentveritas.in/security
+Acknowledgments: https://agentveritas.in/security#disclosures
+
+# We aim to acknowledge reports within 48 hours.
+# Critical vulnerabilities will be addressed within 7 days.
+# Thank you for helping keep Veritas and its users safe.

@@ -1,8 +1,7 @@
 "use client"
 
 import React, { useRef, useEffect, useState } from "react"
-import { MobileNav } from "@/components/mobile-nav"
-import { VeritasFooter } from "@/components/veritas-footer"
+import { SiteShell } from "@/components/site-shell"
 import Link from "next/link"
 
 function useInView(threshold = 0.15) {
@@ -29,8 +28,8 @@ function Section({ children, id, delay = 0 }: { children: React.ReactNode; id: s
 
 export default function PrivacyPage() {
   return (
-    <div className="bg-black text-white min-h-screen font-sans antialiased">
-      <MobileNav />
+    <SiteShell>
+      
 
       <div className="pt-40 pb-24 px-6 md:px-12 lg:px-20">
         <div className="max-w-3xl mx-auto">
@@ -154,8 +153,6 @@ export default function PrivacyPage() {
           </div>
         </div>
       </div>
-
-      <VeritasFooter />
-    </div>
+    </SiteShell>
   )
 }

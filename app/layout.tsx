@@ -2,6 +2,8 @@ import React from "react"
 import type { Metadata } from 'next'
 import { Inter, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
+import './pantone.css'
+
 
 // Same typefaces as the homepage theme (Inter for text, JetBrains Mono for labels and code)
 const inter = Inter({ subsets: ["latin"], weight: ["300", "400", "500", "600"], variable: "--font-inter" });
@@ -67,7 +69,7 @@ const STRUCTURED_DATA = {
       name: 'Veritas',
       url: SITE_URL,
       logo: `${SITE_URL}/icon-512.png`,
-      email: 'privacy@agentveritas.in',
+      email: 'hello@agentveritas.in',
     },
     {
       '@type': 'SoftwareApplication',

@@ -1,8 +1,7 @@
 "use client"
 
 import React, { useRef, useEffect, useState } from "react"
-import { MobileNav } from "@/components/mobile-nav"
-import { VeritasFooter } from "@/components/veritas-footer"
+import { SiteShell } from "@/components/site-shell"
 import { RevealText } from "@/components/reveal-text"
 import Link from "next/link"
 
@@ -122,8 +121,8 @@ Roles are enforced on the server, and administrative actions are written to the 
 
 export default function UserGuidePage() {
   return (
-    <div className="bg-black text-white min-h-screen font-sans antialiased">
-      <MobileNav />
+    <SiteShell>
+      
 
       <section className="pt-40 pb-16 px-6 md:px-12 lg:px-20">
         <div className="max-w-4xl mx-auto">
@@ -159,8 +158,6 @@ export default function UserGuidePage() {
           <Link href="/documentation/troubleshooting" className="text-xs text-white/55 hover:text-white tracking-widest transition-colors">Troubleshooting →</Link>
         </div>
       </div>
-
-      <VeritasFooter />
-    </div>
+    </SiteShell>
   )
 }

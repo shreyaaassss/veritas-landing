@@ -1,8 +1,7 @@
 "use client"
 
 import React, { useRef, useEffect, useState } from "react"
-import { MobileNav } from "@/components/mobile-nav"
-import { VeritasFooter } from "@/components/veritas-footer"
+import { SiteShell } from "@/components/site-shell"
 import { RevealText } from "@/components/reveal-text"
 import Link from "next/link"
 
@@ -63,8 +62,8 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="bg-black text-white min-h-screen font-sans antialiased">
-      <MobileNav />
+    <SiteShell>
+      
 
       {/* ── PAGE HERO ────────────────────────────────────────────────────── */}
       <section className="pt-40 pb-24 px-6 md:px-12 lg:px-20">
@@ -227,8 +226,6 @@ export default function ContactPage() {
           </Link>
         </div>
       </section>
-
-      <VeritasFooter />
-    </div>
+    </SiteShell>
   )
 }

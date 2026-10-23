@@ -79,12 +79,12 @@ const C = 280
 const r2 = (n: number) => Math.round(n * 100) / 100
 const CYCLE = 4.8
 const SERVICES = [
-  { name: "payments-api", pii: true },
-  { name: "billing-api", pii: false },
-  { name: "loan-service", pii: true },
-  { name: "auth-service", pii: true },
-  { name: "crm-sync", pii: false },
-  { name: "analytics-etl", pii: true },
+  { name: "Ingest", pii: true },
+  { name: "Detect", pii: false },
+  { name: "Evaluate", pii: true },
+  { name: "Prevent", pii: true },
+  { name: "Alert", pii: false },
+  { name: "Prove", pii: true },
 ]
 
 function NetworkDiagram() {
@@ -399,6 +399,198 @@ export default function VeritasPage() {
         </div>
       </section>
 
+      {/* ── Features: What it does ── */}
+      <section className="tg-section" style={{ borderTop: "1px solid rgba(255,255,255,0.08)" }} aria-labelledby="features-title">
+        <div className="tg-container">
+          <Reveal className="tg-head">
+            <span className="tg-eyebrow">Features</span>
+            <h2 className="tg-h2" id="features-title">What your systems actually do with personal data.</h2>
+            <p className="tg-body" style={{ maxWidth: 560 }}>
+              Veritas watches logs, APIs and database changes inside your own infrastructure, and keeps evidence an auditor can check without trusting us.
+            </p>
+          </Reveal>
+
+          {/* 6-card grid */}
+          <div style={{ display:"grid", gridTemplateColumns:"repeat(3,1fr)", gap:"64px 40px" }} className="vw-cards">
+            <style>{`
+              @media(max-width:960px){.vw-cards{grid-template-columns:repeat(2,1fr)!important}}
+              @media(max-width:620px){.vw-cards{grid-template-columns:1fr!important}}
+              .vw-win{background:#141414;border:2px solid #F3F1ED;border-radius:8px;box-shadow:6px 6px 0 #DCFF00;height:214px;overflow:hidden;text-align:left;transition:box-shadow 0.25s,border-color 0.25s;}
+              .vw-win:hover{box-shadow:0 0 0 2px #eef35f,0 0 32px rgba(238,243,95,0.35),6px 6px 0 #eef35f!important;border-color:#eef35f!important;}
+              .vw-bar{display:flex;gap:5px;padding:7px 10px;border-bottom:2px solid #F3F1ED;background:#1d1d1d}
+              .vw-bar i{width:7px;height:7px;border-radius:50%}
+              .vw-ttl{font-weight:700;font-size:12px;padding:9px 12px 0;color:#fff}
+              .vw-body{padding:8px 12px 12px;font-size:11px}
+              .vw-chip{position:absolute;border:2px solid #0A0A0A;border-radius:10px;padding:7px 11px;font-weight:700;font-size:11px;line-height:1.25;box-shadow:3px 3px 0 #F3F1ED;white-space:nowrap}
+              .vw-chip b{display:block;font-weight:800;font-size:17px;line-height:1.1}
+              .vw-tag{display:inline-block;font-size:9.5px;font-weight:700;padding:2px 7px;border-radius:99px;border:1.5px solid #5a5a5a;background:#1d1d1d;color:#F3F1ED}
+              .vw-tag.o{background:#FF5722;color:#fff;border-color:#FF5722}
+              .vw-tag.v{background:#7B6CE0;color:#fff;border-color:#7B6CE0}
+              .vw-tag.l{background:#DCFF00;color:#0A0A0A;border-color:#DCFF00}
+              .vw-tile{border:1.5px solid #3a3a3a;border-radius:6px;padding:7px 9px;background:#1d1d1d}
+              .vw-tile small{display:block;font-size:9.5px;color:#a1a1a1;font-weight:500}
+              .vw-tile strong{font-weight:800;font-size:20px;line-height:1.1;color:#fff}
+              .vw-row{display:flex;align-items:center;gap:6px;border:1.5px solid #3a3a3a;border-radius:6px;padding:6px 8px;background:#1d1d1d;font-weight:600;font-size:11px;color:#F3F1ED}
+              .vw-code{font:500 10.5px/1.5 ui-monospace,Menlo,Consolas,monospace;border:1.5px solid #3a3a3a;border-radius:6px;padding:6px 8px;background:#1d1d1d;margin-bottom:6px;word-break:break-all;color:#F3F1ED}
+              .vw-steps{display:flex;gap:4px;margin:6px 0 11px}
+              .vw-steps span{flex:1;text-align:center;font-size:9.5px;font-weight:700;padding:4px 0;border:1.5px solid #3a3a3a;border-radius:5px;background:#1d1d1d;color:#F3F1ED}
+              .vw-steps span.on{background:#7B6CE0;color:#fff;border-color:#7B6CE0}
+              .vw-steps span.now{background:#DCFF00;color:#0A0A0A;border-color:#DCFF00}
+            `}</style>
+
+            {/* 1 : Audit Ledger */}
+            <Reveal delay={0}>
+              <article style={{ textAlign:"center" }}>
+                <div style={{ position:"relative", padding:"0 18px 22px 0", margin:"0 auto 26px", maxWidth:340 }}>
+                  <div className="vw-win" role="img" aria-label="Audit ledger">
+                    <div className="vw-bar"><i style={{background:"#FF5722"}} /><i style={{background:"#DCFF00"}} /><i style={{background:"#7B6CE0"}} /></div>
+                    <div className="vw-ttl">Audit Ledger</div>
+                    <div className="vw-body">
+                      <div style={{ display:"flex", alignItems:"baseline", gap:8, font:"800 20px/1 Inter,sans-serif", margin:"4px 0 9px", color:"#fff", letterSpacing:"-.03em" }}>
+                        Findings → <em style={{ fontStyle:"normal", color:"#DCFF00" }}>Incidents</em>
+                      </div>
+                      <div className="vw-row"><span>INC-4</span><span className="vw-tag o">EXPOSURE</span><span>noisy-service</span></div>
+                      <svg viewBox="0 0 240 34" preserveAspectRatio="none" aria-hidden="true" style={{ display:"block", width:"100%", height:34, marginTop:8 }}><polyline fill="none" stroke="#DCFF00" strokeWidth="2.5" strokeLinejoin="round" points="0,26 20,22 40,24 60,14 80,18 100,8 120,16 140,12 160,20 180,6 200,14 220,10 240,18"/></svg>
+                    </div>
+                  </div>
+                  <span className="vw-chip" style={{ background:"#FF5722", color:"#fff", right:-4, top:58 }}>Reopened: recurred</span>
+                </div>
+                <h3 style={{ fontWeight:600, fontSize:19, lineHeight:1.25, letterSpacing:"-.015em", marginBottom:8 }}>Findings that become a short list</h3>
+                <p style={{ fontSize:14, lineHeight:1.55, color:"#a1a1a1", maxWidth:290, margin:"0 auto" }}>Thousands of alerts become a short list of incidents, each with an owner.</p>
+              </article>
+            </Reveal>
+
+            {/* 2 : Data map */}
+            <Reveal delay={60}>
+              <article style={{ textAlign:"center" }}>
+                <div style={{ position:"relative", padding:"0 18px 22px 0", margin:"0 auto 26px", maxWidth:340 }}>
+                  <div className="vw-win" role="img" aria-label="Data map">
+                    <div className="vw-bar"><i style={{background:"#FF5722"}} /><i style={{background:"#DCFF00"}} /><i style={{background:"#7B6CE0"}} /></div>
+                    <div className="vw-ttl">Data map</div>
+                    <div className="vw-body">
+                      <svg viewBox="0 0 280 150" aria-hidden="true" style={{ display:"block", width:"100%", height:150 }}>
+                        <g stroke="#8a8a8a" strokeWidth="2"><line x1="140" y1="72" x2="52" y2="32"/><line x1="140" y1="72" x2="228" y2="32"/><line x1="140" y1="72" x2="52" y2="116"/><line x1="140" y1="72" x2="228" y2="116"/></g>
+                        <circle cx="140" cy="72" r="15" fill="#141414" stroke="#F3F1ED" strokeWidth="2"/><text x="140" y="75" textAnchor="middle" style={{fontSize:"7.5px", fill:"#F3F1ED", fontWeight:600}}>logs</text>
+                        <circle cx="52" cy="32" r="12" fill="#DCFF00" stroke="#F3F1ED" strokeWidth="2"/><text x="52" y="58" textAnchor="middle" style={{fontSize:"8.5px", fill:"#F3F1ED", fontWeight:600}}>order-svc</text>
+                        <circle cx="228" cy="32" r="12" fill="#7B6CE0" stroke="#F3F1ED" strokeWidth="2"/><text x="228" y="58" textAnchor="middle" style={{fontSize:"8.5px", fill:"#F3F1ED", fontWeight:600}}>support</text>
+                        <circle cx="52" cy="116" r="12" fill="#FF5722" stroke="#F3F1ED" strokeWidth="2"/><text x="52" y="142" textAnchor="middle" style={{fontSize:"8.5px", fill:"#F3F1ED", fontWeight:600}}>kyc-service</text>
+                        <circle cx="228" cy="116" r="12" fill="#2a2a2a" stroke="#F3F1ED" strokeWidth="2"/><text x="228" y="142" textAnchor="middle" style={{fontSize:"8.5px", fill:"#F3F1ED", fontWeight:600}}>analytics</text>
+                      </svg>
+                    </div>
+                  </div>
+                  <span className="vw-chip" style={{ background:"#DCFF00", color:"#0A0A0A", right:-4, bottom:48 }}>Phone, Aadhaar, Email seen</span>
+                </div>
+                <h3 style={{ fontWeight:600, fontSize:19, lineHeight:1.25, letterSpacing:"-.015em", marginBottom:8 }}>See where personal data really flows</h3>
+                <p style={{ fontSize:14, lineHeight:1.55, color:"#a1a1a1", maxWidth:290, margin:"0 auto" }}>An observed map of your systems, not a diagram someone drew.</p>
+              </article>
+            </Reveal>
+
+            {/* 3 : Evidence chain */}
+            <Reveal delay={120}>
+              <article style={{ textAlign:"center" }}>
+                <div style={{ position:"relative", padding:"0 18px 22px 0", margin:"0 auto 26px", maxWidth:340 }}>
+                  <div className="vw-win" role="img" aria-label="Evidence chain">
+                    <div className="vw-bar"><i style={{background:"#FF5722"}} /><i style={{background:"#DCFF00"}} /><i style={{background:"#7B6CE0"}} /></div>
+                    <div className="vw-ttl">Evidence chain</div>
+                    <div className="vw-body">
+                      <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:8, marginTop:4 }}>
+                        <div className="vw-tile"><small>Records</small><strong>Chained</strong></div>
+                        <div className="vw-tile"><small>Checkpoints</small><strong>Signed</strong><small>witnessed</small></div>
+                      </div>
+                      <div style={{ display:"flex", gap:3, marginTop:12 }}>
+                        {["#1","#2","#3","#4","#5"].map(n => <span key={n} className="vw-tag l">{n}</span>)}
+                        <span className="vw-tag">…</span>
+                      </div>
+                    </div>
+                  </div>
+                  <span className="vw-chip" style={{ background:"#DCFF00", color:"#0A0A0A", right:-4, top:54 }}>Independent verifier<b>PASS</b></span>
+                  <span className="vw-chip" style={{ background:"#FF5722", color:"#fff", left:-8, bottom:6 }}>Edited copy<b>FAIL</b></span>
+                </div>
+                <h3 style={{ fontWeight:600, fontSize:19, lineHeight:1.25, letterSpacing:"-.015em", marginBottom:8 }}>Evidence you can verify yourself</h3>
+                <p style={{ fontSize:14, lineHeight:1.55, color:"#a1a1a1", maxWidth:290, margin:"0 auto" }}>Tamper-evident records an auditor checks offline.</p>
+              </article>
+            </Reveal>
+
+            {/* 4 : Agent redaction */}
+            <Reveal delay={0}>
+              <article style={{ textAlign:"center" }}>
+                <div style={{ position:"relative", padding:"0 18px 22px 0", margin:"0 auto 26px", maxWidth:340 }}>
+                  <div className="vw-win" role="img" aria-label="Agent redaction">
+                    <div className="vw-bar"><i style={{background:"#FF5722"}} /><i style={{background:"#DCFF00"}} /><i style={{background:"#7B6CE0"}} /></div>
+                    <div className="vw-ttl">Agent redaction</div>
+                    <div className="vw-body">
+                      <div className="vw-code">callback <span style={{ color:"#FF5722", fontWeight:700 }}>9876543210</span></div>
+                      <div className="vw-code">callback <span style={{ background:"#DCFF00", color:"#0A0A0A", padding:"0 3px", borderRadius:3, fontWeight:700 }}>[PHONE_REDACTED]</span></div>
+                      <div style={{ display:"flex", gap:5, marginTop:9, flexWrap:"wrap" }}>
+                        {["monitor","mask","hash","drop"].map((t,i) => <span key={t} className={`vw-tag${i===1?" v":""}`}>{t}</span>)}
+                      </div>
+                    </div>
+                  </div>
+                  <span className="vw-chip" style={{ background:"#F3F1ED", color:"#0A0A0A", right:-4, bottom:44 }}>Raw values sent<b>None</b></span>
+                </div>
+                <h3 style={{ fontWeight:600, fontSize:19, lineHeight:1.25, letterSpacing:"-.015em", marginBottom:8 }}>Prevention at the source</h3>
+                <p style={{ fontSize:14, lineHeight:1.55, color:"#a1a1a1", maxWidth:290, margin:"0 auto" }}>Personal data is masked on the host before it travels.</p>
+              </article>
+            </Reveal>
+
+            {/* 5 : Rights requests */}
+            <Reveal delay={60}>
+              <article style={{ textAlign:"center" }}>
+                <div style={{ position:"relative", padding:"0 18px 22px 0", margin:"0 auto 26px", maxWidth:340 }}>
+                  <div className="vw-win" role="img" aria-label="Rights requests">
+                    <div className="vw-bar"><i style={{background:"#FF5722"}} /><i style={{background:"#DCFF00"}} /><i style={{background:"#7B6CE0"}} /></div>
+                    <div className="vw-ttl">Rights requests</div>
+                    <div className="vw-body">
+                      <div className="vw-steps">
+                        <span className="on">Lookup</span><span className="on">Tasks</span><span className="now">Confirmed</span><span>Closed</span>
+                      </div>
+                      <div style={{ display:"flex", alignItems:"center", gap:12, fontWeight:600, lineHeight:1.4 }}>
+                        <div style={{ width:64, height:64, borderRadius:"50%", background:"conic-gradient(#7B6CE0 0 100%)", display:"grid", placeItems:"center", flexShrink:0 }}>
+                          <div style={{ width:42, height:42, borderRadius:"50%", background:"#141414", display:"grid", placeItems:"center", fontWeight:800, fontSize:13, color:"#fff" }}>2/2</div>
+                        </div>
+                        <div style={{ fontSize:12, color:"#F3F1ED" }}>2 of 2 owners<br/>confirmed</div>
+                      </div>
+                    </div>
+                  </div>
+                  <span className="vw-chip" style={{ background:"#7B6CE0", color:"#fff", right:-4, bottom:34 }}>Signed record (PDF)</span>
+                </div>
+                <h3 style={{ fontWeight:600, fontSize:19, lineHeight:1.25, letterSpacing:"-.015em", marginBottom:8 }}>Rights requests with proof</h3>
+                <p style={{ fontSize:14, lineHeight:1.55, color:"#a1a1a1", maxWidth:290, margin:"0 auto" }}>Find an identifier, task each owner, keep a signed record.</p>
+              </article>
+            </Reveal>
+
+            {/* 6 : Breach report */}
+            <Reveal delay={120}>
+              <article style={{ textAlign:"center" }}>
+                <div style={{ position:"relative", padding:"0 18px 22px 0", margin:"0 auto 26px", maxWidth:340 }}>
+                  <div className="vw-win" role="img" aria-label="Draft breach report">
+                    <div className="vw-bar"><i style={{background:"#FF5722"}} /><i style={{background:"#DCFF00"}} /><i style={{background:"#7B6CE0"}} /></div>
+                    <div className="vw-ttl">Draft breach report</div>
+                    <div className="vw-body">
+                      <div style={{ display:"grid", gap:5, marginTop:6 }}>
+                        {[["First seen","from chain"],["Acknowledged","12 min"],["Resolved","2 h"]].map(([k,v]) => (
+                          <div key={k} className="vw-row" style={{ justifyContent:"space-between" }}>
+                            <span>{k}</span><span style={{ color:"#DCFF00", fontWeight:700 }}>{v}</span>
+                          </div>
+                        ))}
+                      </div>
+                      <div style={{ marginTop:7, background:"#DCFF00", color:"#0A0A0A", borderRadius:6, padding:"5px 8px", fontWeight:700, fontSize:10 }}>Draft for the DPO and counsel</div>
+                    </div>
+                  </div>
+                  <span className="vw-chip" style={{ background:"#FF5722", color:"#fff", right:-4, top:50 }}>Number affected:<br/>to be completed</span>
+                </div>
+                <h3 style={{ fontWeight:600, fontSize:19, lineHeight:1.25, letterSpacing:"-.015em", marginBottom:8 }}>Draft breach reports</h3>
+                <p style={{ fontSize:14, lineHeight:1.55, color:"#a1a1a1", maxWidth:290, margin:"0 auto" }}>A draft report built from the signed chain, for your DPO.</p>
+              </article>
+            </Reveal>
+          </div>
+
+          <p style={{ marginTop:56, maxWidth:600, fontSize:13, lineHeight:1.6, color:"#a1a1a1" }}>
+            Sample data shown. Veritas monitors your technical systems; it doesn&rsquo;t replace consent management or legal review.
+          </p>
+        </div>
+      </section>
+
       {/* ── Stats ── */}
       <section className="tg-section">
         <div className="tg-container">
@@ -414,6 +606,14 @@ export default function VeritasPage() {
               </Reveal>
             ))}
           </div>
+          {/* ── Scope disclaimer ── */}
+          <Reveal className="tg-head" style={{ marginTop: 40 }}>
+            <div style={{ maxWidth: 640, margin: "0 auto", padding: "20px 24px", borderRadius: 12, border: "1px solid rgba(255,255,255,0.08)", background: "rgba(255,255,255,0.03)" }}>
+              <p className="tg-body-sm" style={{ textAlign: "center", opacity: 0.7 }}>
+                <strong style={{ opacity: 1 }}>Scope:</strong> Veritas provides technical evidence from your systems. It does not replace consent management or legal advice, and it is not a certification.
+              </p>
+            </div>
+          </Reveal>
         </div>
       </section>
 
@@ -458,7 +658,21 @@ export default function VeritasPage() {
         </div>
       </section>
 
-      {/* ── Download ── */}
+      {/* ── Regulatory urgency ── */}
+      <section className="tg-section" style={{ paddingTop: 0 }}>
+        <div className="tg-container">
+          <Reveal>
+            <div style={{ padding: "20px 24px", borderRadius: 12, border: "1px solid rgba(238,243,95,0.15)", background: "rgba(238,243,95,0.04)", display: "flex", flexWrap: "wrap", gap: 12, alignItems: "center", justifyContent: "space-between" }}>
+              <p className="tg-body-sm" style={{ margin: 0, opacity: 0.85 }}>
+                <strong style={{ color: "#eef35f" }}>Pilots open.</strong> Book a demo and see Veritas run on your own logs.
+              </p>
+              <Link href="/book-demo" className="tg-btn tg-btn-primary" style={{ whiteSpace: "nowrap", flexShrink: 0 }}>Talk to us <ArrowRight /></Link>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── Download / Trial ── */}
       <section className="tg-section" id="download">
         <div className="tg-container">
           <Reveal className="tg-head">
@@ -476,7 +690,7 @@ export default function VeritasPage() {
           <h2 className="tg-h2">See it run on<br />your own logs.</h2>
           <p className="tg-body" style={{ maxWidth: 520 }}>Book a demo and watch Veritas mask personal data at the source, turn it into owned incidents, and hand an auditor evidence they can verify on their own.</p>
           <div className="tg-hero-actions" style={{ justifyContent: "center" }}>
-            <Link href="/book-demo" className="tg-btn tg-btn-primary">Book a Demo <ArrowRight /></Link>
+            <Link href="/book-demo" className="tg-btn tg-btn-primary">Book a 20-Min Demo <ArrowRight /></Link>
             <Link href="/how-it-works" className="tg-btn tg-btn-text">How It Works <ArrowRight /></Link>
             <Link href="/documentation" className="tg-btn tg-btn-text">Documentation <ArrowRight /></Link>
           </div>

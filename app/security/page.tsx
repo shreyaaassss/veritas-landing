@@ -1,8 +1,7 @@
 "use client"
 
 import React, { useRef, useEffect, useState } from "react"
-import { MobileNav } from "@/components/mobile-nav"
-import { VeritasFooter } from "@/components/veritas-footer"
+import { SiteShell } from "@/components/site-shell"
 import { RevealText } from "@/components/reveal-text"
 import Link from "next/link"
 
@@ -35,8 +34,8 @@ function Tag({ children }: { children: React.ReactNode }) {
 
 export default function SecurityPage() {
   return (
-    <div className="bg-black text-white min-h-screen font-sans antialiased">
-      <MobileNav />
+    <SiteShell>
+      
 
       {/* Hero */}
       <section className="pt-40 pb-24 px-6 md:px-12 lg:px-20">
@@ -200,7 +199,38 @@ export default function SecurityPage() {
         </div>
       </section>
 
-      <VeritasFooter />
-    </div>
+      {/* Evidence integrity */}
+      <section className="py-24 px-6 md:px-12 lg:px-20 border-t border-white/[0.08]">
+        <div className="max-w-6xl mx-auto">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] tracking-widest text-white/55 bg-white/[0.06] mb-5">EVIDENCE INTEGRITY</span>
+          <h2 className="mt-5 text-4xl md:text-5xl font-light tracking-tight leading-[1.05] mb-10">What tamper-evident means, and what it does not.</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <BentoCard className="p-8" delay={0}>
+              <div className="font-pixel text-[10px] text-[#00cbaa] tracking-widest mb-4">WHAT THE EVIDENCE PROVES</div>
+              <p className="text-sm text-white/65 leading-relaxed mb-4">
+                Every record in Veritas is linked to the previous one by a SHA-256 hash, so a record altered in the middle breaks the chain. Auditors can verify the chain themselves at any time from the dashboard.
+              </p>
+              <p className="text-sm text-white/65 leading-relaxed">
+                On its own, the chain proves <strong className="text-white/80">internal consistency</strong>: that no record was silently edited. Signed checkpoints held by independent witnesses, checked with the stand-alone verifier, extend that to records up to the last checkpoint.
+              </p>
+            </BentoCard>
+            <BentoCard className="p-8" delay={80}>
+              <div className="font-pixel text-[10px] text-amber-300 tracking-widest mb-4">LIMITS TO KNOW</div>
+              <p className="text-sm text-white/65 leading-relaxed mb-4">
+                Someone with direct access to the database could rebuild the whole chain, and the dashboard's own check would still pass. Only the witnesses' signed checkpoints and the stand-alone verifier expose that, so anchoring with at least one witness should be on.
+              </p>
+              <p className="text-sm text-white/65 leading-relaxed">
+                Records written after the last checkpoint are not yet covered by a signature. The audit pack states what it does not prove.
+              </p>
+            </BentoCard>
+          </div>
+          <div className="mt-4 p-5 rounded-2xl border border-white/[0.08] bg-white/[0.03]">
+            <p className="text-xs text-white/50 leading-relaxed">
+              <strong className="text-white/70">Responsible disclosure:</strong> Found a security issue? Email <a href="mailto:security@agentveritas.in" className="underline underline-offset-2 hover:text-white transition-colors">security@agentveritas.in</a>. We aim to acknowledge within 48 hours and resolve critical issues within 7 days. A machine-readable <a href="/.well-known/security.txt" className="underline underline-offset-2 hover:text-white transition-colors">security.txt</a> is available.
+            </p>
+          </div>
+        </div>
+      </section>
+    </SiteShell>
   )
 }
