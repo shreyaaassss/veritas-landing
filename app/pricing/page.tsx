@@ -219,7 +219,7 @@ const TIERS: Tier[] = [
   {
     name: "Pilot",
     forWho: "First evaluation on your own logs",
-    price: "₹25k to ₹50k",
+    price: "₹10k",
     unit: "for 60 to 90 days",
     note: "Credited to your annual licence if you convert",
     limits: ["Up to 3 agents", "Up to 5 users", "1 organisation", "Small log volume"],
@@ -235,7 +235,7 @@ const TIERS: Tier[] = [
   {
     name: "Starter",
     forWho: "Small teams getting started",
-    price: "About ₹12.5k to ₹17k",
+    price: "₹12k",
     unit: "per month, billed annually",
     limits: ["Up to 3 agents", "Up to 5 users", "1 organisation", "About 10 GB/month log volume analysed"],
     features: [
@@ -250,7 +250,7 @@ const TIERS: Tier[] = [
   {
     name: "Professional",
     forWho: "Growing compliance teams",
-    price: "About ₹33k to ₹50k",
+    price: "₹33k",
     unit: "per month, billed annually",
     featured: true,
     limits: ["Up to 15 agents", "Up to 25 users", "1 organisation", "About 50 GB/month log volume analysed"],
@@ -266,8 +266,8 @@ const TIERS: Tier[] = [
   {
     name: "Enterprise",
     forWho: "Broad coverage, regulated sectors",
-    price: "From about ₹1 lakh",
-    unit: "per month, billed annually · multi-year options",
+    price: "Contact us",
+    unit: "Customizable plan, multi-year options",
     limits: ["40+ agents, custom", "Unlimited users", "Multiple organisations", "Custom log volume"],
     features: [
       { label: "All rules, evidence chain and audit pack", included: true },
@@ -292,7 +292,7 @@ const COMPARE: { row: string; cells: [string, string, string, string] }[] = [
   { row: "Backups and chain verification", cells: ["Manual", "Manual", "Scheduled", "Scheduled and custom"] },
   { row: "Support", cells: ["Email", "Email, best effort", "Email, next business day", "Named contact and SLA"] },
   { row: "Onboarding", cells: ["Self-serve", "Self-serve docs", "Guided setup call", "Policy mapping included"] },
-  { row: "Price", cells: ["₹25k to ₹50k, credited if you convert", "About ₹12.5k to ₹17k / month", "About ₹33k to ₹50k / month", "Custom, from about ₹1 lakh / month"] },
+  { row: "Price", cells: ["₹10k, credited if you convert", "₹12k / month", "₹33k / month", "Contact us, customizable"] },
 ]
 
 const LIMITS = [
